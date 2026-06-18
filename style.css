@@ -1,0 +1,393 @@
+/******* GENERAL SECTION ********/
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: "Roboto mono";
+  background-color: #f5f5f4;
+  margin: 0;
+}
+
+.fade-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  pointer-events: none; /* allows clicks through the overlay */
+
+  background: linear-gradient(to top, #f5f5f4 0%, transparent 100%);
+}
+
+.section-container,
+.contact-section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: none;
+  height: fit-content;
+  margin: 90px 0 90px 0;
+  scroll-margin-top: 100px;
+}
+.section-title-container,
+.contact-title-container {
+  background-color: none;
+  width: 70rem;
+  margin: 0 0 20px 0;
+}
+.section-title,
+.contact-section-title {
+  color: #991b1b;
+  font-size: 60px;
+  margin: 0;
+  font-family: "Bitcount Single", system-ui;
+}
+
+/* HEADER SECTION */
+
+header {
+  position: sticky;
+  top: 0;
+  padding: 50px;
+  display: flex;
+  justify-content: flex-end;
+  background: linear-gradient(
+    to bottom,
+    #f5f5f4 0%,
+    #f5f5f4 60%,
+    transparent 100%
+  );
+  z-index: 1000;
+}
+
+.header-button {
+  font-family: "Bitcount Single", system-ui;
+  font-size: 35px;
+  color: #0c0a09;
+  background: none;
+  border: none;
+  margin: 0 12px;
+  text-decoration: none;
+}
+
+/* MAIN SECTION */
+
+main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35em;
+}
+
+.profile-container {
+  color: #0c0a09;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 50px;
+}
+
+.dp {
+  filter: grayscale(100%);
+  height: 350px;
+  width: 350px;
+  object-fit: cover;
+  border-radius: 175px;
+  border: 2px dashed #333;
+  margin: 0 50px 0 100px;
+}
+.name-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Roboto mono", monospace;
+  font-weight: 700;
+  font-size: 70px;
+}
+
+.role {
+  color: #991b1b;
+  margin: 0 0 50px 0;
+  font-family: "Bitcount Single", system-ui;
+  font-size: 70px;
+  font-weight: 500;
+
+  display: inline-block;
+  min-width: 220px; /* adjust based on longest text */
+  white-space: nowrap;
+}
+
+.typing-text {
+  display: inline-block;
+  min-width: 220px; /* adjust based on longest text */
+  height: 80px;
+  white-space: nowrap;
+  margin-bottom: 100px;
+}
+
+#typing-text {
+  border-left: 3px solid #991b1b;
+  padding-left: 8px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.contact-icon-container {
+  display: flex;
+  align-items: center;
+}
+.contact-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.contact-link,
+.contact-link:visited {
+  color: #0c0a09;
+  text-decoration: none;
+  font-family: "Roboto mono";
+  font-size: 25px;
+  margin-left: 50px;
+  animation: colorShift 0.6s infinite;
+}
+
+@keyframes colorShift {
+  0% {
+    color: #0c0a09;
+  }
+  50% {
+    color: #991b1b;
+  }
+  100% {
+    color: #0c0a09;
+  }
+}
+
+hr {
+  border-top: 2px dashed #333;
+  width: 70rem;
+  opacity: 0.3;
+}
+
+/* ABOPUT ME SECTION */
+
+.about-me-highlights {
+  display: flex;
+  gap: 150px;
+  font-family: "Roboto mono";
+  line-height: 1.4;
+  background-color: none;
+  width: 70rem;
+}
+.highlight-left {
+  color: #71717a;
+  font-size: 18px;
+  background-color: none;
+  width: 100%;
+}
+.highlight-right {
+  color: #71717a;
+  font-size: 18px;
+  margin: 0;
+  background-color: none;
+  width: 100%;
+}
+.work-experience-label {
+  font-family: "Bitcount Single", system-ui;
+  font-weight: 600;
+  color: #0c0a09;
+}
+.job-label {
+  font-weight: 700;
+  color: #0c0a09;
+}
+
+/* PROJECTS SECTION */
+
+.project-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 50px;
+  width: 70rem;
+  height: fit-content;
+
+  gap: 20px;
+  font-family: "Roboto mono";
+  line-height: 1.4;
+}
+.project-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: center;
+  padding: 20px;
+  height: 20rem;
+  width: 20%rem;
+  border-radius: 20px;
+  border: 2px solid #0c0a09;
+}
+.project-name {
+  margin: 0;
+  font-family: "Bitcount Single", system-ui;
+  font-size: 40px;
+  line-height: 1;
+}
+.project-description {
+  color: #71717a;
+  font-size: 14px;
+  margin-bottom: 30px 0 30px 0;
+}
+.tag-container {
+  display: flex;
+  align-items: center;
+}
+.tag-name {
+  margin-right: 4px;
+  color: #f5f5f4;
+  background-color: #0c0a09;
+  font-size: 12px;
+  border-radius: 4px;
+  width: max-content;
+  padding: 6px 12px 6px 12px;
+}
+.github-link {
+  color: #0c0a09;
+  font-size: 12px;
+  margin-left: 40px;
+}
+
+/* EXPERTISE SECTION */
+
+.credentials-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  width: 70rem;
+  margin: 60px 0 0 0;
+}
+.certificate {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 2px solid #0c0a09;
+  border-radius: 20px;
+  width: 50%;
+  padding: 30px 20px 30px 20px;
+}
+.badge {
+  height: 160px;
+  width: 160px;
+}
+.expertise-title {
+  font-size: 20px;
+  width: fit-content;
+  font-weight: bold;
+  margin: 0;
+}
+.institution {
+  font-size: 16px;
+  width: fit-content;
+  margin: 0;
+}
+.expertise-description {
+  color: #71717a;
+  font-size: 16px;
+}
+.badge-link {
+  font-size: 14px;
+  width: fit-content;
+  color: #0c0a09;
+}
+
+.tech-title {
+  margin: 0 0 20px 0;
+  font-family: "Bitcount Single", system-ui;
+  font-size: 40px;
+  font-weight: 500;
+  text-align: center;
+}
+.icon-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 20px 30px 60px 0;
+}
+.tech-icon {
+  height: 90px;
+  width: 90px;
+  object-fit: contain;
+}
+
+/**************** CONTACT SECTION *********************/
+
+.contact-section-container {
+  display: flex;
+  align-items: center;
+  padding: 90px;
+  color: #f5f5f4;
+  background-color: #0c0a09;
+  margin: 0;
+  height: fit-content;
+}
+.contact-title-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  height: fit-content;
+  justify-content: center;
+}
+.contact-section-title {
+  color: #f5f5f4;
+}
+.contact-description {
+  margin: 0;
+  font-size: 20px;
+}
+.email-button {
+  margin: 0;
+  color: #0c0a09;
+  background-color: #f5f5f4;
+  font-size: 20px;
+  font-family: "Bitcount Single", system-ui;
+  width: fit-content;
+  padding: 18px 22px 18px 22px;
+  border-radius: 30px;
+  border: none;
+}
+
+/******************* FOOTER SECTION ************************/
+
+.footer-line {
+  margin-top: 20px;
+}
+.footer-text {
+  padding: 25px 25px 0 25px;
+  text-align: center;
+}
+
+/**** FADE BOTTOM ****/
+
+.fade-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  pointer-events: none; /* allows clicks through the overlay */
+}

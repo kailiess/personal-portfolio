@@ -13,13 +13,22 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
+    <div class="fade-bottom"></div>
+
     <!-- HEADER SECTION -->
 
     <header>
-      <a href="#about-me" class="header-button">About me</a>
-      <a href="#projects" class="header-button">Projects</a>
-      <a href="#expertise" class="header-button">Expertise</a>
-      <a class="header-button">Contact</a>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="#about-me">About me</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="menu-btn" id="menuBtn"><p>☰</p></div>
+      </nav>
     </header>
 
     <!-- MAIN SECTION -->
@@ -238,8 +247,6 @@
         <hr class="footer-line" />
         <p class="footer-text">© 2026 Kyle Esposado. Simplicity with intent.</p>
       </footer>
-
-      <div class="fade-bottom"></div>
     </section>
 
     <script src="script.js"></script>

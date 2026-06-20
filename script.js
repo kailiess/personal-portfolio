@@ -86,3 +86,29 @@ closeBtn.addEventListener("click", closeMenu);
 document.querySelectorAll(".mobile-nav-links a").forEach((link) => {
   link.addEventListener("click", closeMenu);
 });
+
+// Scroll reveal animations (fade + slide in from left/right/up)
+const revealEls = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        } else {
+          entry.target.classList.remove("in-view");
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: "0px 0px -60px 0px",
+    },
+  );
+
+  revealEls.forEach((el) => revealObserver.observe(el));
+} else {
+  // Fallback for browsers without IntersectionObserver support
+  revealEls.forEach((el) => el.classList.add("in-view"));
+}

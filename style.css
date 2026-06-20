@@ -8,9 +8,19 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
 a {
   text-decoration: none;
   color: #0c0a09;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .fade-bottom {
@@ -22,6 +32,44 @@ a {
   pointer-events: none;
   background: linear-gradient(to top, #f5f5f4 0%, transparent 100%);
   z-index: 10;
+}
+
+/* ── SCROLL REVEAL ── */
+
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    transform 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  will-change: opacity, transform;
+}
+
+.reveal-left {
+  transform: translateX(-60px);
+}
+
+.reveal-right {
+  transform: translateX(60px);
+}
+
+.reveal-up {
+  transform: translateY(40px);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Slight stagger for grouped reveals */
+.project-container .reveal:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.project-container .reveal:nth-child(3) {
+  transition-delay: 0.2s;
+}
+.credentials-container .reveal:nth-child(2) {
+  transition-delay: 0.15s;
 }
 
 .section-container,
@@ -655,6 +703,11 @@ hr {
   .contact-link {
     animation: none;
     color: #0c0a09;
+  }
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 }
 

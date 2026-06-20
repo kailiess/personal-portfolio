@@ -1,30 +1,29 @@
 /* ════════════════════════════════════════════
    TOKENS
+   ════════════════════════════════════════════
+   Design system: "Field Specimen" — the page treats its own content
+   (photo, jobs, projects, badges) like artifacts pinned to a lab/exhibit
+   board: rotated slightly off-grid, tagged with catalog numbers, torn at
+   the corners, connected by thin strings. One idea, applied consistently,
+   rather than many separate effects.
    ════════════════════════════════════════════ */
 
 :root {
-  --ink: #0c0c0b; /* primary background — warm near-black */
-  --ink-soft: #151513; /* card / elevated surface on dark */
-  --paper: #f3f1ea; /* primary text on dark, bg of the closing section */
-  --graphite: #8c897f; /* muted secondary text, warm gray */
-  --amber: #d99a47; /* signature accent — specimen-tag amber */
-  --line: rgba(243, 241, 234, 0.14); /* hairline on dark */
-  --line-strong: rgba(243, 241, 234, 0.3);
-  --line-on-paper: rgba(12, 12, 11, 0.14);
-  --contact-eyebrow: #a8703c;
-  --contact-desc: #3a3835;
+  --ink: #0d0d0b; /* primary background — warm near-black */
+  --ink-soft: #17160f; /* card / elevated surface on dark */
+  --paper: #f2eee1; /* primary text on dark, bg of the closing section */
+  --graphite: #8b8775; /* muted secondary text, warm gray */
+  --rust: #c1502c; /* signature accent — stamp-ink rust */
+  --moss: #6b7a53; /* secondary accent — specimen-tag olive */
+  --line: rgba(242, 238, 225, 0.14); /* hairline on dark */
+  --line-strong: rgba(242, 238, 225, 0.32);
+  --line-on-paper: rgba(13, 13, 11, 0.14);
+  --contact-eyebrow: #a3623a;
+  --contact-desc: #3a3733;
   --footer-text: #6b6862;
   --header-h: 60px;
 
-  --glass-bg: rgba(21, 21, 19, 0.55);
-  --glass-bg-strong: rgba(21, 21, 19, 0.78);
-  --glass-border: rgba(243, 241, 234, 0.16);
-  --glass-sheen: rgba(243, 241, 234, 0.08);
-  --glass-shadow: rgba(0, 0, 0, 0.35);
-  --blob-amber: rgba(217, 154, 71, 0.32);
-  --blob-graphite: rgba(140, 137, 127, 0.22);
-
-  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
   --font-mono: "Roboto Mono", ui-monospace, monospace;
 }
 
@@ -36,25 +35,18 @@
    into a dark inverted band on the light page, mirroring the original
    design intent instead of flattening it. */
 :root[data-theme="light"] {
-  --ink: #f3f1ea;
-  --ink-soft: #e7e3d8;
+  --ink: #f2eee1;
+  --ink-soft: #e7e1d1;
   --paper: #100f0d;
-  --graphite: #716d63;
-  --amber: #b9772f;
+  --graphite: #716d61;
+  --rust: #a8431f;
+  --moss: #51603c;
   --line: rgba(16, 15, 13, 0.12);
   --line-strong: rgba(16, 15, 13, 0.28);
-  --line-on-paper: rgba(243, 241, 234, 0.14);
-  --contact-eyebrow: #e3aa5e;
-  --contact-desc: #c9c5b9;
+  --line-on-paper: rgba(242, 238, 225, 0.14);
+  --contact-eyebrow: #d98a5e;
+  --contact-desc: #c9c5b6;
   --footer-text: #9b968a;
-
-  --glass-bg: rgba(243, 241, 234, 0.55);
-  --glass-bg-strong: rgba(243, 241, 234, 0.78);
-  --glass-border: rgba(16, 15, 13, 0.14);
-  --glass-sheen: rgba(16, 15, 13, 0.06);
-  --glass-shadow: rgba(16, 15, 13, 0.18);
-  --blob-amber: rgba(185, 119, 47, 0.26);
-  --blob-graphite: rgba(113, 109, 99, 0.18);
 }
 
 body,
@@ -91,6 +83,7 @@ body {
   background-color: var(--ink);
   color: var(--paper);
   font-family: var(--font-mono);
+  font-optical-sizing: auto;
   overflow-x: hidden;
   padding-top: var(--header-h);
 }
@@ -116,95 +109,66 @@ button {
   z-index: 10;
 }
 
+/* ── SPINE LABEL ──
+   A museum-tag strip running up the left edge — the one piece of chrome
+   that announces "this page is a specimen", read once and then ignored. */
+
+.spine-label {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+  border-right: 1px solid var(--line);
+}
+
+.spine-label span {
+  display: inline-block;
+  white-space: nowrap;
+  transform: rotate(-90deg);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+  .spine-label {
+    display: none;
+  }
+}
+
 /* ── AMBIENT BACKGROUND ── */
-/* A quiet blueprint-grid + drifting cross-marks, echoing the "+" specimen
-   motif already used on the logo and profile frame. Kept very low-contrast
-   so it reads as texture, not decoration. */
+/* A quiet grid, tilted a couple of degrees off true, plus a scatter of
+   drifting +/× marks at irregular sizes and positions — texture that
+   reads as "off-kilter lab notes", not a tidy blueprint. */
 
 .bg-decor {
   position: fixed;
   inset: 0;
-  z-index: 0.8;
+  z-index: -1;
   overflow: hidden;
   pointer-events: none;
-}
-
-.bg-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.7;
-  will-change: transform;
-}
-
-.bg-blob--1 {
-  width: 38vw;
-  height: 38vw;
-  top: -10%;
-  left: -8%;
-  background: radial-gradient(circle, var(--blob-amber), transparent 70%);
-  animation: blob-drift-1 34s ease-in-out infinite;
-}
-
-.bg-blob--2 {
-  width: 30vw;
-  height: 30vw;
-  bottom: -12%;
-  right: -6%;
-  background: radial-gradient(circle, var(--blob-graphite), transparent 70%);
-  animation: blob-drift-2 40s ease-in-out infinite;
-}
-
-.bg-blob--3 {
-  width: 22vw;
-  height: 22vw;
-  top: 38%;
-  left: 60%;
-  background: radial-gradient(circle, var(--blob-amber), transparent 72%);
-  animation: blob-drift-3 28s ease-in-out infinite;
-  opacity: 0.5;
-}
-
-@keyframes blob-drift-1 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(6vw, 8vh) scale(1.12);
-  }
-}
-
-@keyframes blob-drift-2 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-7vw, -6vh) scale(1.08);
-  }
-}
-
-@keyframes blob-drift-3 {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(-5vw, 6vh) scale(0.92);
-  }
 }
 
 .bg-decor::before {
   content: "";
   position: absolute;
-  inset: -1px;
+  inset: -20%;
   background-image:
     linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.5;
-  animation: grid-drift 60s linear infinite;
+  background-size: 58px 58px;
+  opacity: 0.45;
+  transform: rotate(2.2deg);
+  animation: grid-drift 70s linear infinite;
 }
 
 @keyframes grid-drift {
@@ -212,14 +176,14 @@ button {
     background-position: 0 0;
   }
   100% {
-    background-position: 64px 128px;
+    background-position: 58px 116px;
   }
 }
 
 .bg-mark {
   position: absolute;
   font-family: var(--font-mono);
-  color: var(--amber);
+  color: var(--rust);
   opacity: 0.16;
   user-select: none;
   animation: mark-float 16s ease-in-out infinite;
@@ -231,128 +195,71 @@ button {
   opacity: 0.6;
 }
 
-.bg-mark.bg-target {
-  pointer-events: auto;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
-}
-
-.bg-mark.bg-target:hover {
-  opacity: 0.4;
-}
-
-.bg-mark.shape-square {
-  width: 16px;
-  height: 16px;
-  border: 1.5px solid var(--amber);
-  opacity: 0.18;
-}
-
-.bg-mark.shape-diamond {
-  width: 14px;
-  height: 14px;
-  border: 1.5px solid var(--amber);
-  transform: rotate(45deg);
-  opacity: 0.16;
-}
-
-.bg-mark.shape-ring {
-  width: 22px;
-  height: 22px;
-  border: 1.5px solid var(--amber);
-  border-radius: 50%;
-  opacity: 0.14;
-}
-
-.bg-mark.popped {
-  animation: mark-pop 0.45s ease forwards !important;
-  pointer-events: none;
-}
-
-@keyframes mark-pop {
-  0% {
-    transform: scale(1);
-    opacity: 0.4;
-  }
-  60% {
-    transform: scale(1.8);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(0.2);
-    opacity: 0;
-  }
-}
-
 .bg-mark--1 {
-  top: 12%;
-  left: 8%;
+  top: 11%;
+  left: 7%;
   font-size: 22px;
+  transform: rotate(-8deg);
   animation-delay: 0s;
 }
 .bg-mark--2 {
-  top: 68%;
-  left: 18%;
-  font-size: 14px;
+  top: 71%;
+  left: 16%;
+  font-size: 16px;
+  transform: rotate(14deg);
   animation-delay: -4s;
   animation-duration: 20s;
 }
 .bg-mark--3 {
-  top: 24%;
-  left: 88%;
+  top: 21%;
+  left: 89%;
   font-size: 18px;
+  transform: rotate(5deg);
   animation-delay: -9s;
   animation-duration: 18s;
 }
 .bg-mark--4 {
-  top: 80%;
-  left: 78%;
-  font-size: 26px;
+  top: 83%;
+  left: 76%;
+  font-size: 24px;
+  transform: rotate(-12deg);
   animation-delay: -2s;
   animation-duration: 22s;
 }
 .bg-mark--5 {
-  top: 46%;
-  left: 50%;
+  top: 44%;
+  left: 53%;
   font-size: 12px;
   animation-delay: -12s;
   animation-duration: 26s;
 }
 .bg-mark--6 {
-  top: 6%;
-  left: 60%;
+  top: 5%;
+  left: 61%;
   width: 70px;
   height: 1px;
   background: var(--line-strong);
+  transform: rotate(-16deg);
   animation-delay: -6s;
   animation-duration: 24s;
 }
 .bg-mark--7 {
-  top: 88%;
-  left: 30%;
+  top: 89%;
+  left: 28%;
   width: 1px;
   height: 70px;
   background: var(--line-strong);
+  transform: rotate(10deg);
   animation-delay: -15s;
   animation-duration: 28s;
 }
 .bg-mark--8 {
-  top: 56%;
-  left: 10%;
+  top: 58%;
+  left: 6%;
+  font-size: 15px;
+  transform: rotate(20deg);
   animation-delay: -8s;
   animation-duration: 19s;
-}
-.bg-mark--9 {
-  top: 16%;
-  left: 40%;
-  animation-delay: -3s;
-  animation-duration: 23s;
-}
-.bg-mark--10 {
-  top: 72%;
-  left: 64%;
-  animation-delay: -17s;
-  animation-duration: 21s;
 }
 
 @keyframes mark-float {
@@ -373,138 +280,8 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .bg-decor::before,
-  .bg-mark,
-  .bg-blob {
+  .bg-mark {
     animation: none;
-  }
-}
-
-/* ── AMBIENT MINI-GAME: "SIGNALS" ── */
-/* Tap the drifting cross-marks in the background as you scroll. Purely
-   optional and ambient — never blocks reading or navigation. */
-
-.signal-hud {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  z-index: 500;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 14px;
-  background-color: var(--glass-bg);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  backdrop-filter: blur(14px) saturate(160%);
-  border: 1px solid var(--glass-border);
-  box-shadow:
-    0 12px 28px -16px var(--glass-shadow),
-    0 1px 0 var(--glass-sheen) inset;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--graphite);
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    background-color 0.35s ease,
-    border-color 0.35s ease;
-  pointer-events: none;
-}
-
-.signal-hud.armed {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.signal-hud .signal-dot {
-  width: 7px;
-  height: 7px;
-  border: 1.5px solid var(--amber);
-  transform: rotate(45deg);
-  flex-shrink: 0;
-}
-
-.signal-hud .signal-count {
-  color: var(--amber);
-  font-weight: 700;
-  min-width: 1.6em;
-  display: inline-block;
-}
-
-.signal-hud .signal-pulse {
-  animation: signal-bump 0.35s ease;
-}
-
-@keyframes signal-bump {
-  0% {
-    transform: scale(1);
-  }
-  40% {
-    transform: scale(1.35);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.signal-ripple {
-  position: fixed;
-  z-index: 480;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid var(--amber);
-  background: radial-gradient(circle, var(--glass-sheen) 0%, transparent 70%);
-  transform: translate(-50%, -50%) scale(0.4);
-  opacity: 0.9;
-  pointer-events: none;
-  animation: ripple-out 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes ripple-out {
-  0% {
-    transform: translate(-50%, -50%) scale(0.4);
-    opacity: 0.85;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(7);
-    opacity: 0;
-  }
-}
-
-.signal-toast {
-  position: fixed;
-  z-index: 481;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--amber);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: toast-rise 0.7s ease forwards;
-}
-
-@keyframes toast-rise {
-  0% {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, calc(-50% - 36px));
-    opacity: 0;
-  }
-}
-
-@media (max-width: 640px) {
-  .signal-hud {
-    bottom: 14px;
-    right: 14px;
-    padding: 7px 11px;
-    font-size: 10px;
   }
 }
 
@@ -548,22 +325,28 @@ button {
   transition-delay: 0.12s;
 }
 
-/* ── SHARED LABEL / EYEBROW ── */
+/* ── SHARED LABEL / EYEBROW ──
+   Every eyebrow across the page is the same small rotated tag — the
+   connective tissue of the specimen system, used consistently rather
+   than once for effect. */
 
 .eyebrow {
   margin: 0 0 14px 0;
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--rust);
+  transform: rotate(-1.4deg);
 }
 
 .section-title-container,
 .contact-title-container {
   width: min(70rem, 90vw);
   margin: 0 0 20px 0;
+  position: relative;
 }
 
 .section-title,
@@ -573,9 +356,32 @@ button {
   margin: 0;
   line-height: 1.05;
   font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
   letter-spacing: -0.01em;
+  position: relative;
+}
+
+/* Oversized outlined catalog number, bled behind each section title —
+   the numbering already on the eyebrows ("01 — About" etc.), made into
+   a structural watermark instead of decoration. */
+.section-watermark {
+  position: absolute;
+  top: -0.62em;
+  left: -0.18em;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(110px, 17vw, 240px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  z-index: -1;
+  transform: rotate(-4deg);
+  user-select: none;
+}
+
+.contact-title-container .section-watermark--contact {
+  -webkit-text-stroke: 1px var(--line-on-paper);
+  top: -0.5em;
 }
 
 .section-container,
@@ -597,13 +403,10 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--glass-bg-strong);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
+  background-color: var(--ink);
   z-index: 1000;
-  border-bottom: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--line);
   box-sizing: border-box;
-  box-shadow: 0 1px 0 var(--glass-sheen) inset;
 }
 
 .navbar {
@@ -622,31 +425,23 @@ header {
   gap: 1.75rem;
 }
 
-.scroll-progress {
-  position: fixed;
-  top: var(--header-h);
-  left: 0;
-  height: 2px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--amber), var(--paper) 140%);
-  z-index: 999;
-  pointer-events: none;
-}
-
 .logo {
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: 0.2em;
   color: var(--paper);
+  display: inline-block;
   transition:
     color 0.2s ease,
-    letter-spacing 0.25s ease;
+    letter-spacing 0.25s ease,
+    transform 0.25s ease;
 }
 
 .logo:hover {
-  color: var(--amber);
+  color: var(--rust);
   letter-spacing: 0.26em;
+  transform: rotate(-3deg);
 }
 
 .nav-links {
@@ -668,11 +463,11 @@ header {
 }
 
 .nav-links li a:hover {
-  color: var(--amber);
+  color: var(--rust);
 }
 
 .nav-index {
-  color: var(--amber);
+  color: var(--rust);
   margin-right: 4px;
 }
 
@@ -725,7 +520,7 @@ header {
   z-index: 1;
   width: 20px;
   height: 20px;
-  background-color: var(--amber);
+  background-color: var(--rust);
   border: 1px solid var(--ink);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
@@ -761,10 +556,14 @@ header {
 }
 
 .theme-toggle:hover {
-  border-color: var(--amber);
+  border-color: var(--rust);
 }
 
-/* ── MAIN / HERO ── */
+/* ── MAIN / HERO ──
+   The photo is pinned at a slight tilt with a torn bottom-right corner
+   and a strip of "tape" over its top-left, like a print dropped onto a
+   desk. The name overlaps its edge instead of sitting in a clean column
+   beside it. */
 
 main {
   width: 100%;
@@ -772,18 +571,18 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 35em;
-  padding: 60px 5vw;
+  padding: 60px 5vw 60px 8vw;
   box-sizing: border-box;
 }
 
 .profile-container {
   color: var(--paper);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   width: 100%;
   max-width: 1100px;
-  gap: 60px;
+  gap: 40px;
 }
 
 .profile-photo-block {
@@ -791,6 +590,9 @@ main {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transform: rotate(-2.6deg) translateY(6px);
 }
 
 .profile-frame {
@@ -798,24 +600,30 @@ main {
   display: inline-block;
 }
 
-.profile-frame::before,
+.profile-frame::before {
+  /* a strip of "tape" laid across the top-left corner */
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: -22px;
+  width: 86px;
+  height: 26px;
+  background: var(--rust);
+  opacity: 0.85;
+  transform: rotate(-32deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
 .profile-frame::after {
   content: "+";
   position: absolute;
+  bottom: -13px;
+  right: -10px;
   font-family: var(--font-mono);
-  color: var(--amber);
+  color: var(--rust);
   font-size: 22px;
   line-height: 1;
-}
-
-.profile-frame::before {
-  top: -11px;
-  left: -11px;
-}
-
-.profile-frame::after {
-  bottom: -11px;
-  right: -11px;
+  transform: rotate(14deg);
 }
 
 .dp {
@@ -827,65 +635,52 @@ main {
   border: 1px solid var(--line-strong);
   box-sizing: border-box;
   display: block;
+  clip-path: polygon(0 0, 100% 0, 100% 88%, 91% 100%, 0 100%);
 }
 
 .profile-caption {
-  margin: 14px 0 0 0;
+  margin: 16px 0 0 0;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--graphite);
+  transform: rotate(1deg);
 }
 
 .name-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 52%;
   max-width: 100%;
+  position: relative;
+  z-index: 1;
+  margin-left: -18px;
+  padding-bottom: 18px;
 }
 
 h1 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: clamp(32px, 5.5vw, 68px);
   line-height: 1.05;
-  text-transform: uppercase;
   letter-spacing: -0.01em;
-  background: linear-gradient(
-    100deg,
-    var(--paper) 30%,
-    var(--amber) 50%,
-    var(--paper) 70%
-  );
-  background-size: 220% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: headline-sheen 7s ease-in-out 1.2s infinite;
+  transform: rotate(-0.6deg);
 }
 
-@keyframes headline-sheen {
-  0% {
-    background-position: 130% 0;
-  }
-  45%,
-  100% {
-    background-position: -20% 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  h1 {
-    animation: none;
-    background-position: 0 0;
-  }
+.accent-name {
+  color: var(--rust);
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--rust);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .role {
-  color: var(--amber);
+  color: var(--rust);
   margin: 0;
   font-family: var(--font-mono);
   font-size: clamp(14px, 2.2vw, 22px);
@@ -903,10 +698,11 @@ h1 {
   height: clamp(28px, 4vw, 36px);
   white-space: nowrap;
   margin: 18px 0 32px 0;
+  transform: rotate(-1deg);
 }
 
 #typing-text {
-  border-left: 2px solid var(--amber);
+  border-left: 2px solid var(--rust);
   padding-left: 8px;
   animation: blink 0.7s infinite;
 }
@@ -933,13 +729,13 @@ h1 {
 }
 
 .contact-icon-container a:hover .contact-icon {
-  transform: translateY(-2px);
+  transform: translateY(-2px) rotate(-6deg);
   opacity: 0.85;
 }
 
 .contact-link,
 .contact-link:visited {
-  color: var(--amber);
+  color: var(--rust);
   text-decoration: none;
   font-family: var(--font-mono);
   font-size: clamp(13px, 1.6vw, 16px);
@@ -950,14 +746,54 @@ h1 {
 }
 
 .contact-link:hover {
-  border-bottom: 1px solid var(--amber);
+  border-bottom: 1px solid var(--rust);
 }
 
 hr {
   border: none;
+  margin: 0;
+  height: 0;
+}
+
+/* ── CUT DIVIDERS ──
+   A plain hairline with an offset "+" notch standing in for a torn-paper
+   cut — the same mark used on the photo frame, reused as punctuation
+   between sections instead of an ordinary rule. */
+
+hr.cut-divider {
+  position: relative;
+  border: none;
   border-top: 1px solid var(--line);
   width: min(70rem, 90vw);
   margin: 0 auto;
+  height: 0;
+  overflow: visible;
+}
+
+hr.cut-divider::after {
+  content: "+";
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+  background: var(--ink);
+  color: var(--rust);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1;
+  padding: 0 6px;
+}
+
+hr.cut-divider--1::after {
+  left: 28%;
+  transform: translateY(-50%) rotate(16deg);
+}
+hr.cut-divider--2::after {
+  left: 64%;
+  transform: translateY(-50%) rotate(-12deg);
+}
+hr.cut-divider--3::after {
+  left: 46%;
+  transform: translateY(-50%) rotate(8deg);
 }
 
 /* ── ABOUT ME ── */
@@ -982,25 +818,69 @@ hr {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--amber);
+  color: var(--rust);
   font-size: 0.85em;
+  margin: 0 0 18px 0;
+}
+
+.job-entry {
+  position: relative;
+  padding: 14px 16px 14px 18px;
+  margin-bottom: 14px;
+  border-left: 2px solid var(--line-strong);
+}
+
+.job-entry::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--moss);
 }
 
 .job-label {
+  display: block;
   font-weight: 700;
   color: var(--paper);
+  margin: 0 0 4px 0;
+  font-size: 1em;
 }
 
-/* ── PROJECTS ── */
+.job-meta {
+  margin: 0;
+  font-size: 0.92em;
+}
+
+/* ── PROJECTS ──
+   Cards pinned to a vertical "string" down the middle of the section,
+   alternating sides and tilt — an evidence-board layout instead of a
+   uniform two-column grid. */
 
 .project-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-top: 50px;
+  --rot: 0deg;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  margin-top: 60px;
   width: min(70rem, 90vw);
-  gap: 20px;
   font-family: var(--font-mono);
   line-height: 1.5;
+  position: relative;
+}
+
+.project-container::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+  transform: translateX(-50%);
+  z-index: 0;
 }
 
 .project-grid {
@@ -1008,48 +888,47 @@ hr {
   flex-direction: column;
   justify-content: space-between;
   padding: 28px;
-  min-height: 20rem;
+  width: 82%;
   border-radius: 0;
   border: 1px solid var(--line);
+  background-color: var(--ink);
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
+  z-index: 1;
+  transform: rotate(var(--rot));
   transition:
     border-color 0.25s ease,
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.3s ease;
-  transform: perspective(900px) rotateX(var(--ry, 0deg))
-    rotateY(var(--rx, 0deg)) translateY(var(--lift, 0px));
-  transform-style: preserve-3d;
 }
 
-.project-grid::after,
-.certificate::after,
-.skills-container::after {
+.project-grid::before {
   content: "";
   position: absolute;
-  inset: -60%;
-  background: linear-gradient(
-    115deg,
-    transparent 42%,
-    var(--glass-sheen) 50%,
-    transparent 58%
-  );
-  transform: translateX(-130%);
-  transition: transform 0.7s ease;
-  pointer-events: none;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--rust);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.project-grid:hover::after,
-.certificate:hover::after,
-.skills-container:hover::after {
-  transform: translateX(45%);
+.project-grid:nth-of-type(odd) {
+  --rot: -1.3deg;
+  margin-right: auto;
+}
+
+.project-grid:nth-of-type(even) {
+  --rot: 1.1deg;
+  margin-left: auto;
 }
 
 .project-grid:hover {
-  border-color: var(--amber);
-  --lift: -6px;
-  box-shadow: 0 18px 34px -22px rgba(217, 154, 71, 0.45);
+  border-color: var(--rust);
+  transform: rotate(var(--rot)) translateY(-6px);
+  box-shadow: 0 18px 34px -22px rgba(193, 80, 44, 0.45);
 }
 
 .project-index {
@@ -1058,14 +937,13 @@ hr {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--amber);
+  color: var(--rust);
 }
 
 .project-name {
   margin: 0 0 12px 0;
   font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
   font-size: clamp(22px, 3vw, 32px);
   line-height: 1.15;
   color: var(--paper);
@@ -1073,7 +951,7 @@ hr {
 }
 
 .project-grid:hover .project-name {
-  color: var(--amber);
+  color: var(--rust);
 }
 
 .project-description {
@@ -1107,12 +985,12 @@ hr {
 }
 
 .tag-name:hover {
-  border-color: var(--amber);
-  color: var(--amber);
+  border-color: var(--rust);
+  color: var(--rust);
 }
 
 .github-link {
-  color: var(--amber);
+  color: var(--rust);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1120,7 +998,9 @@ hr {
   white-space: nowrap;
 }
 
-/* ── EXPERTISE ── */
+/* ── EXPERTISE ──
+   The same pinned-card idea, in a second tag color (moss) so the two
+   types of content read as different specimen categories. */
 
 .credentials-container {
   display: flex;
@@ -1128,11 +1008,12 @@ hr {
   align-items: stretch;
   gap: 40px;
   width: min(70rem, 90vw);
-  margin: 60px 0 0 0;
+  margin: 70px 0 0 0;
   flex-wrap: wrap;
 }
 
 .certificate {
+  --rot: -0.9deg;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -1143,20 +1024,29 @@ hr {
   padding: 28px 24px;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
+  transform: rotate(var(--rot));
   transition:
     border-color 0.25s ease,
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.3s ease;
-  transform: perspective(900px) rotateX(var(--ry, 0deg))
-    rotateY(var(--rx, 0deg)) translateY(var(--lift, 0px));
-  transform-style: preserve-3d;
+}
+
+.certificate::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 36px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--moss);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .certificate:hover {
-  border-color: var(--amber);
-  --lift: -6px;
-  box-shadow: 0 18px 34px -22px rgba(217, 154, 71, 0.45);
+  border-color: var(--moss);
+  transform: rotate(var(--rot)) translateY(-6px);
+  box-shadow: 0 18px 34px -22px rgba(107, 122, 83, 0.45);
 }
 
 .badge {
@@ -1186,12 +1076,13 @@ hr {
 
 .badge-link {
   font-size: 13px;
-  color: var(--amber);
+  color: var(--rust);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .skills-container {
+  --rot: 0.7deg;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1202,17 +1093,30 @@ hr {
   padding: 28px 24px;
   box-sizing: border-box;
   position: relative;
-  overflow: hidden;
+  transform: rotate(var(--rot));
   transition:
     border-color 0.25s ease,
     transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.3s ease;
 }
 
+.skills-container::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--moss);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
 .skills-container:hover {
-  border-color: var(--amber);
-  transform: translateY(-6px);
-  box-shadow: 0 18px 34px -22px rgba(217, 154, 71, 0.45);
+  border-color: var(--moss);
+  transform: rotate(var(--rot)) translateY(-6px);
+  box-shadow: 0 18px 34px -22px rgba(107, 122, 83, 0.45);
 }
 
 .tech-title {
@@ -1222,7 +1126,7 @@ hr {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--rust);
   text-align: center;
 }
 
@@ -1238,10 +1142,18 @@ hr {
   width: clamp(48px, 6vw, 72px);
   object-fit: contain;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotate(var(--icon-rot, 0deg));
+}
+
+.icon-container img:nth-child(odd) {
+  --icon-rot: -6deg;
+}
+.icon-container img:nth-child(even) {
+  --icon-rot: 5deg;
 }
 
 .tech-icon:hover {
-  transform: translateY(-5px) scale(1.08);
+  transform: rotate(0deg) translateY(-5px) scale(1.1);
 }
 
 /* ── CONTACT ── */
@@ -1283,7 +1195,48 @@ hr {
   line-height: 1.6;
 }
 
+.stamp-button-wrap {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp-ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: -1;
+  width: clamp(190px, 24vw, 260px);
+  height: clamp(190px, 24vw, 260px);
+  animation: stamp-spin 38s linear infinite;
+  pointer-events: none;
+}
+
+.stamp-ring-text {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  fill: var(--contact-eyebrow);
+  opacity: 0.85;
+}
+
+@keyframes stamp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-ring {
+    animation: none;
+  }
+}
+
 .email-button {
+  position: relative;
   margin: 0;
   color: var(--paper);
   background-color: var(--ink);
@@ -1306,7 +1259,7 @@ hr {
 .email-button:hover {
   background-color: transparent;
   color: var(--ink);
-  transform: translateY(-3px);
+  transform: translateY(-3px) rotate(-1deg);
   box-shadow: 0 12px 24px -16px rgba(12, 12, 11, 0.4);
 }
 
@@ -1351,8 +1304,8 @@ hr {
     gap: 36px;
   }
 
-  .project-container {
-    grid-template-columns: 1fr 1fr;
+  .project-grid {
+    width: 88%;
   }
 
   .credentials-container {
@@ -1384,11 +1337,16 @@ hr {
     display: block;
   }
 
-  /* Hero */
+  /* Hero — drop the overlap/rotation, stack cleanly */
   .profile-container {
     flex-direction: column;
+    align-items: center;
     text-align: center;
     gap: 32px;
+  }
+
+  .profile-photo-block {
+    transform: rotate(-1.5deg);
   }
 
   .dp {
@@ -1400,6 +1358,12 @@ hr {
   .name-container {
     width: 100%;
     align-items: center;
+    margin-left: 0;
+    padding-bottom: 0;
+  }
+
+  h1 {
+    transform: none;
   }
 
   .role {
@@ -1420,9 +1384,17 @@ hr {
     gap: 32px;
   }
 
-  /* Projects — single column */
-  .project-container {
-    grid-template-columns: 1fr;
+  /* Projects — full width, no zigzag string */
+  .project-container::before {
+    display: none;
+  }
+
+  .project-grid,
+  .project-grid:nth-of-type(odd),
+  .project-grid:nth-of-type(even) {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .project-grid {
@@ -1444,6 +1416,10 @@ hr {
   .section-container,
   .contact-section-container {
     margin: 60px 0;
+  }
+
+  .section-watermark {
+    font-size: clamp(80px, 28vw, 140px);
   }
 }
 
@@ -1495,6 +1471,10 @@ hr {
   .contact-section-container {
     padding: 48px 6vw;
   }
+
+  .stamp-ring {
+    display: none;
+  }
 }
 
 @media (max-width: 360px) {
@@ -1528,42 +1508,19 @@ hr {
 /* ── MOBILE NAV OVERLAY ── */
 
 .mobile-nav-overlay {
-  display: flex;
+  display: none;
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(160deg, var(--glass-sheen) 0%, transparent 45%),
-    var(--glass-bg-strong);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  backdrop-filter: blur(28px) saturate(180%);
+  background: var(--ink);
   z-index: 2000;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2.2rem;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.35s ease;
-}
-
-.mobile-nav-overlay .mobile-nav-links,
-.mobile-nav-overlay .mobile-theme-toggle-row {
-  transform: scale(0.94) translateY(10px);
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mobile-nav-overlay.open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.mobile-nav-overlay.open .mobile-nav-links,
-.mobile-nav-overlay.open .mobile-theme-toggle-row {
-  transform: scale(1) translateY(0);
+  display: flex;
 }
 
 .mobile-nav-links {
@@ -1587,7 +1544,7 @@ hr {
 }
 
 .mobile-nav-links li a:hover {
-  color: var(--amber);
+  color: var(--rust);
 }
 
 .close-btn {

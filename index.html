@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="favicon.png" type="image/png" />
@@ -16,33 +16,22 @@
   <body>
     <!-- AMBIENT BACKGROUND DECORATION -->
     <div class="bg-decor" aria-hidden="true">
-      <div class="bg-blob bg-blob--1"></div>
-      <div class="bg-blob bg-blob--2"></div>
-      <div class="bg-blob bg-blob--3"></div>
-      <span class="bg-mark bg-target bg-mark--1">+</span>
-      <span class="bg-mark bg-target bg-mark--2">+</span>
-      <span class="bg-mark bg-target bg-mark--3">+</span>
-      <span class="bg-mark bg-target bg-mark--4">+</span>
-      <span class="bg-mark bg-target bg-mark--5">+</span>
-      <span class="bg-mark bg-target shape-square bg-mark--8"></span>
-      <span class="bg-mark bg-target shape-diamond bg-mark--9"></span>
-      <span class="bg-mark bg-target shape-ring bg-mark--10"></span>
+      <span class="bg-mark bg-mark--1">+</span>
+      <span class="bg-mark bg-mark--2">&times;</span>
+      <span class="bg-mark bg-mark--3">+</span>
+      <span class="bg-mark bg-mark--4">&times;</span>
+      <span class="bg-mark bg-mark--5">+</span>
       <span class="bg-mark bg-mark--6 mark-line"></span>
       <span class="bg-mark bg-mark--7 mark-line"></span>
-    </div>
-
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <div class="signal-hud" id="signalHud" aria-live="polite">
-      <span class="signal-dot"></span>
-      <span
-        >Signals&nbsp;<span class="signal-count" id="signalCount"
-          >00</span
-        ></span
-      >
+      <span class="bg-mark bg-mark--8">+</span>
     </div>
 
     <div class="fade-bottom"></div>
+
+    <!-- SPINE LABEL — runs along the left edge like a museum exhibit tag -->
+    <div class="spine-label" aria-hidden="true">
+      <span>FIELD SPECIMEN — K. ESPOSADO — DAVAO, PH —</span>
+    </div>
 
     <!-- HEADER SECTION -->
     <header>
@@ -220,7 +209,7 @@
         </div>
         <div class="name-container">
           <p class="eyebrow">+ Profile — 001</p>
-          <h1>Hi, I am Kyle</h1>
+          <h1>Hi, I am <span class="accent-name">Kyle</span></h1>
           <div class="typing-text">
             <p class="role" id="typing-text">Social Strategist</p>
           </div>
@@ -263,11 +252,12 @@
         </div>
       </div>
     </main>
-    <hr />
+    <hr class="cut-divider cut-divider--1" />
 
     <!-- ABOUT SECTION -->
     <section class="section-container" id="about-me">
       <div class="section-title-container reveal reveal-up">
+        <span class="section-watermark" aria-hidden="true">01</span>
         <p class="eyebrow">+ 01 — About</p>
         <p class="section-title">About Me</p>
       </div>
@@ -288,26 +278,30 @@
         </div>
         <div class="highlight-right reveal reveal-right">
           <p class="work-experience-label">Work Experience</p>
-          <p>
-            <br />
-            <span class="job-label"
-              >Social Media Manager and Communications Coordinator</span
-            ><br />
-            Parents Against Vape<br />September 2023 - Present
-          </p>
-          <p>
-            <span class="job-label">Communications Support Intern</span><br />
-            Campaign for Tobacco-Free Kids, South Africa<br />June 2025 -
-            September 2025
-          </p>
+          <div class="job-entry">
+            <p class="job-label">
+              Social Media Manager and Communications Coordinator
+            </p>
+            <p class="job-meta">
+              Parents Against Vape — September 2023 – Present
+            </p>
+          </div>
+          <div class="job-entry">
+            <p class="job-label">Communications Support Intern</p>
+            <p class="job-meta">
+              Campaign for Tobacco-Free Kids, South Africa — June 2025 –
+              September 2025
+            </p>
+          </div>
         </div>
       </div>
     </section>
-    <hr />
+    <hr class="cut-divider cut-divider--2" />
 
     <!-- PROJECT SECTION -->
     <section class="section-container" id="projects">
       <div class="section-title-container reveal reveal-up">
+        <span class="section-watermark" aria-hidden="true">02</span>
         <p class="eyebrow">+ 02 — Projects</p>
         <p class="section-title">Projects</p>
       </div>
@@ -396,11 +390,12 @@
         </div>
       </div>
     </section>
-    <hr />
+    <hr class="cut-divider cut-divider--3" />
 
     <!-- SKILLS AND CERTIFICATION SECTION -->
     <section class="section-container" id="expertise">
       <div class="section-title-container reveal reveal-up">
+        <span class="section-watermark" aria-hidden="true">03</span>
         <p class="eyebrow">+ 03 — Expertise</p>
         <p class="section-title">Skills and Certification</p>
       </div>
@@ -443,6 +438,11 @@
     <!-- CONTACT SECTION -->
     <section class="contact-section-container" id="contact">
       <div class="contact-title-container reveal reveal-up">
+        <span
+          class="section-watermark section-watermark--contact"
+          aria-hidden="true"
+          >04</span
+        >
         <p class="eyebrow">+ 04 — Contact</p>
         <p class="contact-section-title">Get in Touch</p>
         <p class="contact-description">
@@ -450,9 +450,27 @@
           what you were actually supposed to do today? Send me an email&mdash;my
           inbox is open, judgment is not. &#128233;
         </p>
-        <button onclick="sendEmail('Write me something!')" class="email-button">
-          Send me an email &#9993;
-        </button>
+        <div class="stamp-button-wrap">
+          <svg class="stamp-ring" viewBox="0 0 220 220" aria-hidden="true">
+            <path
+              id="stampRingPath"
+              fill="none"
+              d="M110,20 a90,90 0 1,1 -0.1,0"
+            />
+            <text class="stamp-ring-text">
+              <textPath href="#stampRingPath" startOffset="0%">
+                &#8226; OPEN INBOX &#8226; JUDGMENT NOT INCLUDED &#8226; OPEN
+                INBOX &#8226; JUDGMENT NOT INCLUDED
+              </textPath>
+            </text>
+          </svg>
+          <button
+            onclick="sendEmail('Write me something!')"
+            class="email-button"
+          >
+            Send me an email &#9993;
+          </button>
+        </div>
       </div>
 
       <!-- FOOTER SECTION -->

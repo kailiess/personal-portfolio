@@ -19,15 +19,14 @@
 
     <header>
       <nav class="navbar">
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
           <li><a href="#about-me">About me</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
 
-        <div class="menu-btn" id="menuBtn"><p>☰</p></div>
+        <div class="menu-btn" id="menuBtn">☰</div>
       </nav>
     </header>
 
@@ -35,25 +34,47 @@
 
     <main>
       <div class="profile-container">
-        <img class="dp" src="assets/dp.jpg" />
+        <img class="dp" src="assets/dp.jpg" alt="Profile photo of Kyle" />
         <div class="name-container">
           <h1>Hi, I am Kyle</h1>
           <div class="typing-text">
             <p class="role" id="typing-text">Social Strategist</p>
           </div>
           <div class="contact-icon-container">
-            <a href="https://www.facebook.com/prynceek" target="_blank"
-              ><img class="contact-icon" src="assets/fb-icon.png"
-            /></a>
-            <a href="https://www.instagram.com/prynncek/" target="_blank"
-              ><img class="contact-icon" src="assets/ig-icon.png"
-            /></a>
+            <a
+              href="https://www.facebook.com/prynceek"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              <img
+                class="contact-icon"
+                src="assets/fb-icon.png"
+                alt="Facebook"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/prynncek/"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <img
+                class="contact-icon"
+                src="assets/ig-icon.png"
+                alt="Instagram"
+              />
+            </a>
             <a
               href="https://www.linkedin.com/in/prince-kyle-esposado-42aa54372/"
               target="_blank"
-              ><img class="contact-icon" src="assets/linkedin-icon.png"
-            /></a>
-            <a href="#" class="contact-link"> Contact me ↗ </a>
+              aria-label="LinkedIn"
+            >
+              <img
+                class="contact-icon"
+                src="assets/linkedin-icon.png"
+                alt="LinkedIn"
+              />
+            </a>
+            <a href="#contact" class="contact-link"> Contact me ↗ </a>
           </div>
         </div>
       </div>
@@ -77,7 +98,7 @@
           <p>
             Alongside tech, I work as a digital communications officer and youth
             advocate, creating social media campaigns that raise awareness about
-            vaping and nicotine risks for parents and young people. I’m
+            vaping and nicotine risks for parents and young people. I'm
             interested in using technology, design, and storytelling to build
             useful solutions and support meaningful public health advocacy.
           </p>
@@ -88,12 +109,13 @@
             <br />
             <span class="job-label"
               >Social Media Manager and Communications Coordinator</span
-            ><br />Parents Against Vape<br />September 2023 - Present
+            ><br />
+            Parents Against Vape<br />September 2023 - Present
           </p>
 
           <p>
-            <span class="job-label">Communications Support Intern</span
-            ><br />Campaign for Tobacco-Free Kids, South Africa<br />June 2025 -
+            <span class="job-label">Communications Support Intern</span><br />
+            Campaign for Tobacco-Free Kids, South Africa<br />June 2025 -
             September 2025
           </p>
         </div>
@@ -195,10 +217,10 @@
 
       <div class="credentials-container">
         <div class="certificate">
-          <img class="badge" src="assets/badge.png" />
+          <img class="badge" src="assets/badge.png" alt="IT Specialist badge" />
           <div class="certificate-info">
             <p class="expertise-title">IT Specialist - Network Security</p>
-            <p class="institution">Certifort/ Pearson VUE</p>
+            <p class="institution">Certifort / Pearson VUE</p>
             <p class="expertise-description">
               Demonstrated proficiency in network security concepts and
               practices.
@@ -214,13 +236,17 @@
         <div class="skills-container">
           <p class="tech-title">Technologies</p>
           <div class="icon-container">
-            <img class="tech-icon" src="assets/html-icon.png" />
-            <img class="tech-icon" src="assets/css-icon.png" />
-            <img class="tech-icon" src="assets/js-icon.png" />
-            <img class="tech-icon" src="assets/react-icon.png" />
-            <img class="tech-icon" src="assets/python-icon.png" />
-            <img class="tech-icon" src="assets/dart-icon.png" />
-            <img class="tech-icon" src="assets/flutter-icon.png" />
+            <img class="tech-icon" src="assets/html-icon.png" alt="HTML" />
+            <img class="tech-icon" src="assets/css-icon.png" alt="CSS" />
+            <img class="tech-icon" src="assets/js-icon.png" alt="JavaScript" />
+            <img class="tech-icon" src="assets/react-icon.png" alt="React" />
+            <img class="tech-icon" src="assets/python-icon.png" alt="Python" />
+            <img class="tech-icon" src="assets/dart-icon.png" alt="Dart" />
+            <img
+              class="tech-icon"
+              src="assets/flutter-icon.png"
+              alt="Flutter"
+            />
           </div>
         </div>
       </div>
@@ -228,7 +254,7 @@
 
     <!-- CONTACT SECTION -->
 
-    <section class="contact-section-container" id="expertise">
+    <section class="contact-section-container" id="contact">
       <div class="contact-title-container">
         <p class="contact-section-title">Get in Touch</p>
         <p class="contact-description">

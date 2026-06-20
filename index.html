@@ -16,13 +16,30 @@
   <body>
     <!-- AMBIENT BACKGROUND DECORATION -->
     <div class="bg-decor" aria-hidden="true">
-      <span class="bg-mark bg-mark--1">+</span>
-      <span class="bg-mark bg-mark--2">+</span>
-      <span class="bg-mark bg-mark--3">+</span>
-      <span class="bg-mark bg-mark--4">+</span>
-      <span class="bg-mark bg-mark--5">+</span>
+      <div class="bg-blob bg-blob--1"></div>
+      <div class="bg-blob bg-blob--2"></div>
+      <div class="bg-blob bg-blob--3"></div>
+      <span class="bg-mark bg-target bg-mark--1">+</span>
+      <span class="bg-mark bg-target bg-mark--2">+</span>
+      <span class="bg-mark bg-target bg-mark--3">+</span>
+      <span class="bg-mark bg-target bg-mark--4">+</span>
+      <span class="bg-mark bg-target bg-mark--5">+</span>
+      <span class="bg-mark bg-target shape-square bg-mark--8"></span>
+      <span class="bg-mark bg-target shape-diamond bg-mark--9"></span>
+      <span class="bg-mark bg-target shape-ring bg-mark--10"></span>
       <span class="bg-mark bg-mark--6 mark-line"></span>
       <span class="bg-mark bg-mark--7 mark-line"></span>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <div class="signal-hud" id="signalHud" aria-live="polite">
+      <span class="signal-dot"></span>
+      <span
+        >Signals&nbsp;<span class="signal-count" id="signalCount"
+          >00</span
+        ></span
+      >
     </div>
 
     <div class="fade-bottom"></div>

@@ -72,6 +72,20 @@ function type() {
 
 type();
 
+// Scroll progress indicator
+const scrollProgress = document.getElementById("scrollProgress");
+
+function updateScrollProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  if (scrollProgress) scrollProgress.style.width = pct + "%";
+}
+
+window.addEventListener("scroll", updateScrollProgress, { passive: true });
+window.addEventListener("resize", updateScrollProgress);
+updateScrollProgress();
+
 const fadeBar = document.querySelector(".fade-bottom");
 
 window.addEventListener("scroll", () => {
@@ -119,6 +133,113 @@ closeBtn.addEventListener("click", closeMenu);
 document.querySelectorAll(".mobile-nav-links a").forEach((link) => {
   link.addEventListener("click", closeMenu);
 });
+
+// ── AMBIENT MINI-GAME: "SIGNALS" ──
+// Tap the drifting geometric marks in the background. Purely optional;
+// never intercepts clicks meant for real content.
+(function initSignalGame() {
+  const hud = document.getElementById("signalHud");
+  const countEl = document.getElementById("signalCount");
+  const targets = Array.from(document.querySelectorAll(".bg-target"));
+  if (!hud || !countEl || !targets.length) return;
+
+  let score = parseInt(localStorage.getItem("signalScore") || "0", 10);
+  countEl.textContent = String(score).padStart(2, "0");
+
+  let armed = false;
+  function arm() {
+    if (armed) return;
+    armed = true;
+    hud.classList.add("armed");
+  }
+  window.addEventListener("scroll", arm, { once: true, passive: true });
+  targets.forEach((t) => t.addEventListener("mouseenter", arm, { once: true }));
+
+  function randomSpot() {
+    return {
+      top: 6 + Math.random() * 86 + "%",
+      left: 4 + Math.random() * 90 + "%",
+    };
+  }
+
+  function spawnRipple(x, y) {
+    const ripple = document.createElement("div");
+    ripple.className = "signal-ripple";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+    document.body.appendChild(ripple);
+    ripple.addEventListener("animationend", () => ripple.remove());
+  }
+
+  function spawnToast(x, y) {
+    const toast = document.createElement("div");
+    toast.className = "signal-toast";
+    toast.textContent = "+1";
+    toast.style.left = x + "px";
+    toast.style.top = y + "px";
+    document.body.appendChild(toast);
+    toast.addEventListener("animationend", () => toast.remove());
+  }
+
+  targets.forEach((mark) => {
+    mark.addEventListener("click", (e) => {
+      if (mark.classList.contains("popped")) return;
+      arm();
+
+      const rect = mark.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      spawnRipple(x, y);
+      spawnToast(x, y);
+
+      score += 1;
+      localStorage.setItem("signalScore", String(score));
+      countEl.textContent = String(score).padStart(2, "0");
+      countEl.classList.remove("signal-pulse");
+      void countEl.offsetWidth;
+      countEl.classList.add("signal-pulse");
+
+      mark.classList.add("popped");
+      setTimeout(
+        () => {
+          const spot = randomSpot();
+          mark.style.top = spot.top;
+          mark.style.left = spot.left;
+          mark.classList.remove("popped");
+        },
+        900 + Math.random() * 1200,
+      );
+    });
+  });
+})();
+
+// ── CARD TILT ──
+// Subtle pointer-follow tilt on project and certificate cards, switched
+// off for touch devices and reduced-motion users.
+(function initCardTilt() {
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+  const isTouch = window.matchMedia("(hover: none)").matches;
+  if (prefersReduced || isTouch) return;
+
+  const cards = document.querySelectorAll(".project-grid, .certificate");
+
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.setProperty("--rx", px * 6 + "deg");
+      card.style.setProperty("--ry", py * -6 + "deg");
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+    });
+  });
+})();
 
 // Scroll reveal animations (fade + slide in from left/right/up)
 const revealEls = document.querySelectorAll(".reveal");

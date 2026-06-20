@@ -13,15 +13,6 @@ a {
   color: #0c0a09;
 }
 
-.favicon {
-  height: 48px;
-  width: 48px;
-  filter: grayscale(100%);
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px dashed #333;
-}
-
 .fade-bottom {
   position: fixed;
   bottom: 0;

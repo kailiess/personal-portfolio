@@ -14,27 +14,101 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
+    <!-- AMBIENT BACKGROUND DECORATION -->
+    <div class="bg-decor" aria-hidden="true">
+      <span class="bg-mark bg-mark--1">+</span>
+      <span class="bg-mark bg-mark--2">+</span>
+      <span class="bg-mark bg-mark--3">+</span>
+      <span class="bg-mark bg-mark--4">+</span>
+      <span class="bg-mark bg-mark--5">+</span>
+      <span class="bg-mark bg-mark--6 mark-line"></span>
+      <span class="bg-mark bg-mark--7 mark-line"></span>
+    </div>
+
     <div class="fade-bottom"></div>
 
     <!-- HEADER SECTION -->
     <header>
       <nav class="navbar">
         <a href="#" class="logo" aria-label="Back to top">K — E</a>
-        <ul class="nav-links" id="navLinks">
-          <li>
-            <a href="#about-me"><span class="nav-index">01</span>About me</a>
-          </li>
-          <li>
-            <a href="#projects"><span class="nav-index">02</span>Projects</a>
-          </li>
-          <li>
-            <a href="#expertise"><span class="nav-index">03</span>Expertise</a>
-          </li>
-          <li>
-            <a href="#contact"><span class="nav-index">04</span>Contact</a>
-          </li>
-        </ul>
-        <div class="menu-btn" id="menuBtn">&#9776;</div>
+        <div class="nav-right">
+          <ul class="nav-links" id="navLinks">
+            <li>
+              <a href="#about-me"><span class="nav-index">01</span>About me</a>
+            </li>
+            <li>
+              <a href="#projects"><span class="nav-index">02</span>Projects</a>
+            </li>
+            <li>
+              <a href="#expertise"
+                ><span class="nav-index">03</span>Expertise</a
+              >
+            </li>
+            <li>
+              <a href="#contact"><span class="nav-index">04</span>Contact</a>
+            </li>
+          </ul>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle light and dark mode"
+            aria-pressed="false"
+          >
+            <svg
+              class="toggle-track-icon icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              />
+            </svg>
+            <svg
+              class="toggle-track-icon icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <span class="toggle-knob">
+              <svg
+                class="knob-icon-sun"
+                id="toggleKnobIcon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+                />
+              </svg>
+              <svg
+                class="knob-icon-moon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </span>
+          </button>
+          <div class="menu-btn" id="menuBtn">&#9776;</div>
+        </div>
       </nav>
     </header>
 
@@ -55,6 +129,67 @@
           <a href="#contact"><span class="nav-index">04</span>Contact</a>
         </li>
       </ul>
+      <div class="mobile-theme-toggle-row">
+        <span>Theme</span>
+        <button
+          class="theme-toggle"
+          id="themeToggleMobile"
+          type="button"
+          aria-label="Toggle light and dark mode"
+          aria-pressed="false"
+        >
+          <svg
+            class="toggle-track-icon icon-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+            />
+          </svg>
+          <svg
+            class="toggle-track-icon icon-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <span class="toggle-knob">
+            <svg
+              class="knob-icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              />
+            </svg>
+            <svg
+              class="knob-icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </span>
+        </button>
+      </div>
     </div>
 
     <!-- MAIN SECTION -->

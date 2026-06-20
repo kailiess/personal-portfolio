@@ -1,3 +1,36 @@
+// Theme toggle (dark / light)
+(function initTheme() {
+  const root = document.documentElement;
+  const stored = localStorage.getItem("theme");
+  const prefersLight =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  const initial = stored || (prefersLight ? "light" : "dark");
+  applyTheme(initial);
+
+  function applyTheme(theme) {
+    if (theme === "light") {
+      root.setAttribute("data-theme", "light");
+    } else {
+      root.removeAttribute("data-theme");
+    }
+    document
+      .querySelectorAll(".theme-toggle")
+      .forEach((btn) => btn.setAttribute("aria-pressed", theme === "light"));
+  }
+
+  function toggleTheme() {
+    const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+    applyTheme(next);
+    localStorage.setItem("theme", next);
+  }
+
+  document
+    .querySelectorAll(".theme-toggle")
+    .forEach((btn) => btn.addEventListener("click", toggleTheme));
+})();
+
 const words = [
   "Web Developer",
   "Youth Advocate",

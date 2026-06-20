@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="favicon.png" type="image/png" />
@@ -19,11 +19,20 @@
     <!-- HEADER SECTION -->
     <header>
       <nav class="navbar">
+        <a href="#" class="logo" aria-label="Back to top">K — E</a>
         <ul class="nav-links" id="navLinks">
-          <li><a href="#about-me">About me</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="#about-me"><span class="nav-index">01</span>About me</a>
+          </li>
+          <li>
+            <a href="#projects"><span class="nav-index">02</span>Projects</a>
+          </li>
+          <li>
+            <a href="#expertise"><span class="nav-index">03</span>Expertise</a>
+          </li>
+          <li>
+            <a href="#contact"><span class="nav-index">04</span>Contact</a>
+          </li>
         </ul>
         <div class="menu-btn" id="menuBtn">&#9776;</div>
       </nav>
@@ -33,18 +42,32 @@
     <div class="mobile-nav-overlay" id="mobileNavOverlay">
       <button class="close-btn" id="closeBtn">&#10005;</button>
       <ul class="mobile-nav-links" id="mobileNavLinks">
-        <li><a href="#about-me">About me</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#expertise">Expertise</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="#about-me"><span class="nav-index">01</span>About me</a>
+        </li>
+        <li>
+          <a href="#projects"><span class="nav-index">02</span>Projects</a>
+        </li>
+        <li>
+          <a href="#expertise"><span class="nav-index">03</span>Expertise</a>
+        </li>
+        <li>
+          <a href="#contact"><span class="nav-index">04</span>Contact</a>
+        </li>
       </ul>
     </div>
 
     <!-- MAIN SECTION -->
     <main>
       <div class="profile-container reveal reveal-up">
-        <img class="dp" src="assets/dp.jpg" alt="Profile photo of Kyle" />
+        <div class="profile-photo-block">
+          <div class="profile-frame">
+            <img class="dp" src="assets/dp.jpg" alt="Profile photo of Kyle" />
+          </div>
+          <p class="profile-caption">Fig. 01 — Davao, PH</p>
+        </div>
         <div class="name-container">
+          <p class="eyebrow">+ Profile — 001</p>
           <h1>Hi, I am Kyle</h1>
           <div class="typing-text">
             <p class="role" id="typing-text">Social Strategist</p>
@@ -93,6 +116,7 @@
     <!-- ABOUT SECTION -->
     <section class="section-container" id="about-me">
       <div class="section-title-container reveal reveal-up">
+        <p class="eyebrow">+ 01 — About</p>
         <p class="section-title">About Me</p>
       </div>
       <div class="about-me-highlights">
@@ -132,18 +156,22 @@
     <!-- PROJECT SECTION -->
     <section class="section-container" id="projects">
       <div class="section-title-container reveal reveal-up">
+        <p class="eyebrow">+ 02 — Projects</p>
         <p class="section-title">Projects</p>
       </div>
       <div class="project-container">
         <div class="project-grid reveal reveal-left">
-          <p class="project-name">WAVES RESERVATION SYSTEM</p>
-          <p class="project-description">
-            Waves Reservation System is a web-based beach booking platform built
-            using HTML, CSS, JavaScript, and Laravel. It allows users to view
-            schedules, reserve slots, and manage bookings through a simple and
-            responsive interface, while providing administrators with efficient
-            reservation control and data management.
-          </p>
+          <div>
+            <p class="project-index">01</p>
+            <p class="project-name">WAVES RESERVATION SYSTEM</p>
+            <p class="project-description">
+              Waves Reservation System is a web-based beach booking platform
+              built using HTML, CSS, JavaScript, and Laravel. It allows users to
+              view schedules, reserve slots, and manage bookings through a
+              simple and responsive interface, while providing administrators
+              with efficient reservation control and data management.
+            </p>
+          </div>
           <div class="tag-container">
             <p class="tag-name">HTML</p>
             <p class="tag-name">CSS</p>
@@ -160,15 +188,18 @@
         </div>
 
         <div class="project-grid reveal reveal-right">
-          <p class="project-name">Banana Leaf Disease Detection System</p>
-          <p class="project-description">
-            The ResNet50 Banana Leaf Disease Detection System is an AI-based
-            diagnostic tool built using Python, TensorFlow, and a ResNet50
-            model. It allows users to upload banana leaf images to detect
-            diseases such as Black Sigatoka and Cordana, providing fast and
-            accurate classification with confidence scores through a simple web
-            and mobile-friendly interface.
-          </p>
+          <div>
+            <p class="project-index">02</p>
+            <p class="project-name">Banana Leaf Disease Detection System</p>
+            <p class="project-description">
+              The ResNet50 Banana Leaf Disease Detection System is an AI-based
+              diagnostic tool built using Python, TensorFlow, and a ResNet50
+              model. It allows users to upload banana leaf images to detect
+              diseases such as Black Sigatoka and Cordana, providing fast and
+              accurate classification with confidence scores through a simple
+              web and mobile-friendly interface.
+            </p>
+          </div>
           <div class="tag-container">
             <p class="tag-name">HTML</p>
             <p class="tag-name">CSS</p>
@@ -184,16 +215,19 @@
         </div>
 
         <div class="project-grid reveal reveal-left">
-          <p class="project-name">STOCKLY INVENTORY SYSTEM</p>
-          <p class="project-description">
-            Stockly is a web-based Inventory Management System designed to help
-            businesses efficiently track, manage, and monitor their product
-            stocks. It provides two levels of system access, Admin and Super
-            Admin, each with their own set of tools and responsibilities. The
-            system enables real-time stock monitoring, movement recording,
-            supplier management, and automated low stock alerts to keep
-            inventory operations organized and accurate.
-          </p>
+          <div>
+            <p class="project-index">03</p>
+            <p class="project-name">STOCKLY INVENTORY SYSTEM</p>
+            <p class="project-description">
+              Stockly is a web-based Inventory Management System designed to
+              help businesses efficiently track, manage, and monitor their
+              product stocks. It provides two levels of system access, Admin and
+              Super Admin, each with their own set of tools and
+              responsibilities. The system enables real-time stock monitoring,
+              movement recording, supplier management, and automated low stock
+              alerts to keep inventory operations organized and accurate.
+            </p>
+          </div>
           <div class="tag-container">
             <p class="tag-name">HTML</p>
             <p class="tag-name">CSS</p>
@@ -215,6 +249,7 @@
     <!-- SKILLS AND CERTIFICATION SECTION -->
     <section class="section-container" id="expertise">
       <div class="section-title-container reveal reveal-up">
+        <p class="eyebrow">+ 03 — Expertise</p>
         <p class="section-title">Skills and Certification</p>
       </div>
       <div class="credentials-container">
@@ -256,6 +291,7 @@
     <!-- CONTACT SECTION -->
     <section class="contact-section-container" id="contact">
       <div class="contact-title-container reveal reveal-up">
+        <p class="eyebrow">+ 04 — Contact</p>
         <p class="contact-section-title">Get in Touch</p>
         <p class="contact-description">
           Got questions, ideas, or a sudden urge to reach out instead of doing

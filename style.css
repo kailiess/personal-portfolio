@@ -198,6 +198,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 50%;
+  max-width: 100%;
 }
 
 h1 {
@@ -220,6 +221,8 @@ h1 {
 
 .typing-text {
   display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
   height: clamp(48px, 7vw, 80px);
   white-space: nowrap;
   margin-bottom: 40px;
@@ -589,6 +592,15 @@ hr {
   .name-container {
     width: 100%;
     align-items: center;
+  }
+
+  .role {
+    font-size: clamp(20px, 7.5vw, 70px);
+  }
+
+  .typing-text {
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .contact-icon-container {

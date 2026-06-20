@@ -16,7 +16,6 @@
     <div class="fade-bottom"></div>
 
     <!-- HEADER SECTION -->
-
     <header>
       <nav class="navbar">
         <ul class="nav-links" id="navLinks">
@@ -25,13 +24,22 @@
           <li><a href="#expertise">Expertise</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-
-        <div class="menu-btn" id="menuBtn">☰</div>
+        <div class="menu-btn" id="menuBtn">&#9776;</div>
       </nav>
     </header>
 
-    <!-- MAIN SECTION -->
+    <!-- MOBILE NAV OVERLAY (outside header so it sits above everything) -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+      <button class="close-btn" id="closeBtn">&#10005;</button>
+      <ul class="mobile-nav-links" id="mobileNavLinks">
+        <li><a href="#about-me">About me</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
 
+    <!-- MAIN SECTION -->
     <main>
       <div class="profile-container">
         <img class="dp" src="assets/dp.jpg" alt="Profile photo of Kyle" />
@@ -74,7 +82,7 @@
                 alt="LinkedIn"
               />
             </a>
-            <a href="#contact" class="contact-link"> Contact me ↗ </a>
+            <a href="#contact" class="contact-link"> Contact me &#8599; </a>
           </div>
         </div>
       </div>
@@ -82,7 +90,6 @@
     <hr />
 
     <!-- ABOUT SECTION -->
-
     <section class="section-container" id="about-me">
       <div class="section-title-container">
         <p class="section-title">About Me</p>
@@ -94,7 +101,6 @@
             growing interest in AI and modern web technologies through projects
             using React and Flutter.
           </p>
-
           <p>
             Alongside tech, I work as a digital communications officer and youth
             advocate, creating social media campaigns that raise awareness about
@@ -112,7 +118,6 @@
             ><br />
             Parents Against Vape<br />September 2023 - Present
           </p>
-
           <p>
             <span class="job-label">Communications Support Intern</span><br />
             Campaign for Tobacco-Free Kids, South Africa<br />June 2025 -
@@ -124,12 +129,10 @@
     <hr />
 
     <!-- PROJECT SECTION -->
-
     <section class="section-container" id="projects">
       <div class="section-title-container">
         <p class="section-title">Projects</p>
       </div>
-
       <div class="project-container">
         <div class="project-grid">
           <p class="project-name">WAVES RESERVATION SYSTEM</p>
@@ -150,7 +153,7 @@
               href="https://github.com/AaronOlanolan08/waves-reservation"
               target="_blank"
               class="github-link"
-              >View Github ↗</a
+              >View Github &#8599;</a
             >
           </div>
         </div>
@@ -174,7 +177,7 @@
               href="https://github.com/eej-sinining/Thesis-Banana-CNN"
               target="_blank"
               class="github-link"
-              >View Github ↗</a
+              >View Github &#8599;</a
             >
           </div>
         </div>
@@ -200,7 +203,7 @@
               href="https://stockly-inventory.lovable.app/login"
               target="_blank"
               class="github-link"
-              >View Live ↗</a
+              >View Live &#8599;</a
             >
           </div>
         </div>
@@ -209,12 +212,10 @@
     <hr />
 
     <!-- SKILLS AND CERTIFICATION SECTION -->
-
     <section class="section-container" id="expertise">
       <div class="section-title-container">
         <p class="section-title">Skills and Certification</p>
       </div>
-
       <div class="credentials-container">
         <div class="certificate">
           <img class="badge" src="assets/badge.png" alt="IT Specialist badge" />
@@ -228,11 +229,10 @@
             <a
               href="https://www.credly.com/badges/b7a89fac-c440-49e8-8b8f-cddf1b326f16/public_url"
               class="badge-link"
-              >View on Credly ↗</a
+              >View on Credly &#8599;</a
             >
           </div>
         </div>
-
         <div class="skills-container">
           <p class="tech-title">Technologies</p>
           <div class="icon-container">
@@ -253,25 +253,25 @@
     </section>
 
     <!-- CONTACT SECTION -->
-
     <section class="contact-section-container" id="contact">
       <div class="contact-title-container">
         <p class="contact-section-title">Get in Touch</p>
         <p class="contact-description">
           Got questions, ideas, or a sudden urge to reach out instead of doing
-          what you were actually supposed to do today? Send me an email—my inbox
-          is open, judgment is not. 📩
+          what you were actually supposed to do today? Send me an email&mdash;my
+          inbox is open, judgment is not. &#128233;
         </p>
         <button onclick="sendEmail('Write me something!')" class="email-button">
-          Send me an email ✉
+          Send me an email &#9993;
         </button>
       </div>
 
       <!-- FOOTER SECTION -->
-
       <footer>
         <hr class="footer-line" />
-        <p class="footer-text">© 2026 Kyle Esposado. Simplicity with intent.</p>
+        <p class="footer-text">
+          &#169; 2026 Kyle Esposado. Simplicity with intent.
+        </p>
       </footer>
     </section>
 

@@ -66,18 +66,23 @@ function sendEmail(message) {
 
 // Mobile hamburger menu
 const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
+const overlay = document.getElementById("mobileNavOverlay");
+const closeBtn = document.getElementById("closeBtn");
 
-menuBtn.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuBtn.textContent = isOpen ? "✕" : "☰";
-  document.body.style.overflow = isOpen ? "hidden" : "";
-});
+function openMenu() {
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
 
-navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuBtn.textContent = "☰";
-    document.body.style.overflow = "";
-  });
+function closeMenu() {
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+menuBtn.addEventListener("click", openMenu);
+closeBtn.addEventListener("click", closeMenu);
+
+// Close when any nav link is tapped
+document.querySelectorAll(".mobile-nav-links a").forEach((link) => {
+  link.addEventListener("click", closeMenu);
 });
